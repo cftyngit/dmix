@@ -111,8 +111,6 @@ public class MainMenuActivity extends MPDroidActivities.MPDroidActivity implemen
 
     private View mOutputsRootFrame;
 
-    private QueueFragment mQueueFragment;
-
     private TextView mTextView;
 
     static {
@@ -325,7 +323,6 @@ public class MainMenuActivity extends MPDroidActivities.MPDroidActivity implemen
 
         mLibraryFragment = initializeLibraryFragment();
         mOutputsFragment = initializeOutputsFragment();
-        mQueueFragment = (QueueFragment) mFragmentManager.findFragmentById(R.id.queue_fragment);
 
         if (savedInstanceState == null) {
             switchMode(DisplayMode.MODE_LIBRARY);
@@ -413,9 +410,17 @@ public class MainMenuActivity extends MPDroidActivities.MPDroidActivity implemen
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        boolean result = true;
-        final boolean itemHandled = mDrawerToggle.onOptionsItemSelected(item) ||
-                mQueueFragment != null && mQueueFragment.onOptionsItemSelected(item);
+        final boolean itemHandled = mDrawerToggle.onOptionsItemSelected(item);
+
+        // Handle item selection
+        if (!itemHandled) {
+            switch (item.getItemId()) {
+                case R.id.menu_search:
+                    onSearchRequested();
+                    break;
+            }
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
