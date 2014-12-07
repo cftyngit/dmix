@@ -16,7 +16,6 @@
 
 package com.namelessdev.mpdroid;
 
-import com.namelessdev.mpdroid.MPDroidActivities.MPDroidFragmentActivity;
 import com.namelessdev.mpdroid.fragments.BrowseFragment;
 import com.namelessdev.mpdroid.fragments.LibraryFragment;
 import com.namelessdev.mpdroid.fragments.OutputsFragment;
