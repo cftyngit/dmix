@@ -31,8 +31,6 @@ import org.a0z.mpd.MPD;
 import org.a0z.mpd.MPDStatus;
 
 import android.app.AlertDialog;
-import android.app.ActionBar;
-import android.app.ActionBar.OnNavigationListener;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
