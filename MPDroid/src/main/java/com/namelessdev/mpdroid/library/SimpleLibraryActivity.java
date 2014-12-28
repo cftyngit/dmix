@@ -23,6 +23,7 @@ import com.namelessdev.mpdroid.fragments.AlbumsGridFragment;
 import com.namelessdev.mpdroid.fragments.BrowseFragment;
 import com.namelessdev.mpdroid.fragments.FSFragment;
 import com.namelessdev.mpdroid.fragments.LibraryFragment;
+import com.namelessdev.mpdroid.fragments.OutputsFragment;
 import com.namelessdev.mpdroid.fragments.SongsFragment;
 import com.namelessdev.mpdroid.fragments.StreamsFragment;
 import com.namelessdev.mpdroid.helpers.MPDControl;
@@ -101,6 +102,8 @@ public class SimpleLibraryActivity extends MPDroidActivities.MPDroidActivity imp
             rootFragment = new FSFragment().init(folder);
         } else if (intent.hasExtra(Stream.EXTRA)) {
             rootFragment = new StreamsFragment();
+        } else if (intent.hasExtra(OutputsFragment.EXTRA)) {
+            rootFragment = new OutputsFragment();
         } else {
             throw new IllegalStateException(debugIntent(intent));
         }
@@ -144,6 +147,8 @@ public class SimpleLibraryActivity extends MPDroidActivities.MPDroidActivity imp
 
             if (rootFragment instanceof BrowseFragment) {
                 setTitle(((BrowseFragment) rootFragment).getTitle());
+            } else if (rootFragment instanceof OutputsFragment) {
+                setTitle(R.string.outputs);
             }
             final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
