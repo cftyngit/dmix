@@ -20,7 +20,7 @@ import com.namelessdev.mpdroid.helpers.MPDControl;
 
 import org.a0z.mpd.MPD;
 import org.a0z.mpd.MPDStatus;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -61,7 +61,7 @@ public class NowPlayingActivity extends MPDroidActivities.MPDroidActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.mpd_mainmenu, menu);
+        getMenuInflater().inflate(R.menu.mpd_now_playing_menu, menu);
         getMenuInflater().inflate(R.menu.mpd_queuemenu, menu);
         menu.removeItem(R.id.PLM_EditPL);
         return true;
