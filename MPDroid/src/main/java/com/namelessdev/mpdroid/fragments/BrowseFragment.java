@@ -60,13 +60,8 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.List;
 
-import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
-import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
-import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
-
 public abstract class BrowseFragment extends Fragment implements OnMenuItemClickListener,
-        AsyncExecListener, OnItemClickListener,
-        OnRefreshListener {
+        AsyncExecListener, OnItemClickListener {
 
     public static final int ADD = 0;
 
@@ -111,8 +106,6 @@ public abstract class BrowseFragment extends Fragment implements OnMenuItemClick
     protected View mLoadingView;
 
     protected View mNoResultView;
-
-    protected PullToRefreshLayout mPullToRefreshLayout;
 
     private boolean mFirstUpdateDone = false;
 
@@ -332,7 +325,6 @@ public abstract class BrowseFragment extends Fragment implements OnMenuItemClick
         mLoadingTextView = (TextView) view.findViewById(R.id.loadingText);
         mNoResultView = view.findViewById(R.id.noResultLayout);
         mLoadingTextView.setText(getLoadingText());
-        mPullToRefreshLayout = (PullToRefreshLayout) view.findViewById(R.id.pullToRefresh);
 
         return view;
     }
@@ -402,12 +394,6 @@ public abstract class BrowseFragment extends Fragment implements OnMenuItemClick
     }
 
     @Override
-    public void onRefreshStarted(final View view) {
-        mPullToRefreshLayout.setRefreshComplete();
-        updateList();
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         mApp.setActivity(getActivity());
@@ -430,12 +416,6 @@ public abstract class BrowseFragment extends Fragment implements OnMenuItemClick
             mList.setAdapter(getCustomListAdapter());
         }
         refreshFastScrollStyle();
-        if (mPullToRefreshLayout != null) {
-            ActionBarPullToRefresh.from(getActivity())
-                    .allChildrenArePullable()
-                    .listener(this)
-                    .setup(mPullToRefreshLayout);
-        }
     }
 
     /**
@@ -500,9 +480,7 @@ public abstract class BrowseFragment extends Fragment implements OnMenuItemClick
             // The view has been destroyed, bail.
             return;
         }
-        if (mPullToRefreshLayout != null) {
-            mPullToRefreshLayout.setEnabled(true);
-        }
+
         if (mItems != null) {
             mList.setAdapter(getCustomListAdapter());
         }
@@ -528,9 +506,6 @@ public abstract class BrowseFragment extends Fragment implements OnMenuItemClick
         mList.setAdapter(null);
         mNoResultView.setVisibility(View.GONE);
         mLoadingView.setVisibility(View.VISIBLE);
-        if (mPullToRefreshLayout != null) {
-            mPullToRefreshLayout.setEnabled(false);
-        }
 
         // Loading Artists asynchronous...
         mApp.oMPDAsyncHelper.addAsyncExecListener(this);
