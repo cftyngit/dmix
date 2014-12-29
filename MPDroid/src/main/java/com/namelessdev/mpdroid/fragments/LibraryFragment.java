@@ -143,7 +143,7 @@ public class LibraryFragment extends Fragment {
 
         @Override
         public Fragment getItem(final int i) {
-            final Fragment fragment;
+            final BrowseFragment fragment;
             final String tab = currentTabs.get(i);
 
             switch (tab) {
@@ -174,6 +174,10 @@ public class LibraryFragment extends Fragment {
                 default:
                     fragment = null;
                     break;
+            }
+
+            if (fragment != null) {
+                fragment.setEmbedded(true);
             }
 
             return fragment;
