@@ -468,10 +468,6 @@ public abstract class BrowseFragment extends Fragment implements OnMenuItemClick
         }
     }
 
-    public void setActivityTitle(final CharSequence title) {
-        getActivity().setTitle(title);
-    }
-
     /**
      * Update the view from the items list if items is set.
      */
